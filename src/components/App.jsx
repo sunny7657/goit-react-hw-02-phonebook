@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { Section } from './Section/Section';
+import { Contact } from './Contact/Contact';
 
-let randomKey = '';
 export class App extends Component {
   state = {
     contacts: [],
@@ -19,16 +19,16 @@ export class App extends Component {
     evt.preventDefault();
     const { name, contacts } = this.state;
     contacts.push(name);
-    console.dir(contacts);
 
     this.reset();
   };
 
   reset = () => {
-    this.setState({ name: '' });
+    this.setState({ name: '', number: '' });
   };
 
   render() {
+    console.log(this.state);
     return (
       <>
         <Section title="Phonebook">
@@ -42,6 +42,9 @@ export class App extends Component {
                 value={this.state.name}
                 onChange={this.handleChange}
               />
+            </label>
+            <label>
+              Number
               <input
                 type="tel"
                 name="number"
@@ -55,17 +58,10 @@ export class App extends Component {
         </Section>
         <Section title="Contacts">
           {this.state.contacts.length > 0 && (
-            <ul>
-              {this.state.contacts.map(contact => {
-                randomKey = nanoid();
-                return (
-                  <li name="contact" key={randomKey}>
-                    {' '}
-                    {contact}
-                  </li>
-                );
-              })}
-            </ul>
+            <Contact
+              contacts={this.state.contacts}
+              number={this.state.number}
+            />
           )}
         </Section>
       </>
