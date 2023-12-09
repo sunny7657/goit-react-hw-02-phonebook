@@ -1,7 +1,7 @@
 import { Component } from 'react';
-// import { nanoid } from 'nanoid';
+import { nanoid } from 'nanoid';
 import { Section } from './Section/Section';
-import { Contact } from './Contact/Contact';
+// import { Contact } from './Contact/Contact';
 
 export class App extends Component {
   state = {
@@ -13,22 +13,24 @@ export class App extends Component {
   handleChange = evt => {
     const { name, value } = evt.target;
     this.setState({ [name]: value });
+    // console.log(evt);
   };
 
   handleSubmit = evt => {
     evt.preventDefault();
-    const { name, contacts } = this.state;
+    const { name, contacts, number } = this.state;
     contacts.push(name);
+    this.setState({ number: evt.target.value });
 
-    this.reset();
+    // this.reset();
   };
 
-  reset = () => {
-    this.setState({ name: '', number: '' });
-  };
+  // reset = () => {
+  //   this.setState({ name: '', number: '' });
+  // };
 
   render() {
-    console.log(this.state);
+    console.log(this.state.number);
     return (
       <>
         <Section title="Phonebook">
@@ -58,10 +60,19 @@ export class App extends Component {
         </Section>
         <Section title="Contacts">
           {this.state.contacts.length > 0 && (
-            <Contact
-              contacts={this.state.contacts}
-              number={this.state.number}
-            />
+            // <Contact
+            //   contacts={this.state.contacts}
+            //   number={this.state.number}
+            // />
+            <ul>
+              {this.state.contacts.map(contact => {
+                return (
+                  <li name="contact" key={nanoid()}>
+                    {contact}:{this.state.number}
+                  </li>
+                );
+              })}
+            </ul>
           )}
         </Section>
       </>
