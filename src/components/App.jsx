@@ -20,17 +20,19 @@ export class App extends Component {
     evt.preventDefault();
     const { name, contacts, number } = this.state;
     contacts.push(name);
-    this.setState({ number: evt.target.value });
+    console.log(number);
+    const contactNum = number;
 
-    // this.reset();
+    this.reset();
+    return contactNum;
   };
 
-  // reset = () => {
-  //   this.setState({ name: '', number: '' });
-  // };
+  reset = () => {
+    this.setState({ name: '', number: '' });
+  };
 
   render() {
-    console.log(this.state.number);
+    console.log(this.state);
     return (
       <>
         <Section title="Phonebook">
@@ -68,7 +70,7 @@ export class App extends Component {
               {this.state.contacts.map(contact => {
                 return (
                   <li name="contact" key={nanoid()}>
-                    {contact}:{this.state.number}
+                    {contact}:{this.contactNum}
                   </li>
                 );
               })}
