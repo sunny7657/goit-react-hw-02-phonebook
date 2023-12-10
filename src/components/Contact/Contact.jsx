@@ -1,12 +1,12 @@
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 
-export const Contact = ({ contacts, number }) => (
+export const Contact = ({ contacts }) => (
   <ul>
     {contacts.map(contact => {
-      console.log(number);
+      const { name, number, id } = contact;
       return (
-        <li name="contact" key={nanoid()}>
-          {contact}:{number}
+        <li name="contact" key={id}>
+          {name}: {number}
         </li>
       );
     })}

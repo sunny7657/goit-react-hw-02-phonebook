@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { Section } from './Section/Section';
 import { FormAddContact } from './FormAddContact/FormAddContact';
-// import { Contact } from './Contact/Contact';
+import { Contact } from './Contact/Contact';
 
 export class App extends Component {
   state = {
@@ -11,7 +11,8 @@ export class App extends Component {
   };
 
   handleSubmit = data => {
-    this.setState({ contacts: data });
+    const newContact = { ...data, id: nanoid() };
+    this.setState(prev => ({ contacts: [...prev.contacts, newContact] }));
   };
 
   render() {
@@ -19,6 +20,11 @@ export class App extends Component {
       <>
         <Section title="Phonebook">
           <FormAddContact onSubmit={this.handleSubmit} />
+        </Section>
+        <Section title="Contacts">
+          {this.state.contacts.length > 0 && (
+            <Contact contacts={this.state.contacts} />
+          )}
         </Section>
       </>
     );
