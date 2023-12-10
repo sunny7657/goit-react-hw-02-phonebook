@@ -1,65 +1,32 @@
-// export class FormAddContact extends Component {
-//   state = {
-//     contacts: [],
-//     name: '',
-//     number: '',
-//   };
+import { Component } from 'react';
 
-//   handleChange = evt => {
-//     const { name, value } = evt.target;
-//     this.setState({ [name]: value });
-//   };
+export class FormAddContact extends Component {
+  state = {
+    name: '',
+  };
 
-//   handleSubmit = evt => {
-//     evt.preventDefault();
-//     const { name, contacts } = this.state;
-//     contacts.push(name);
+  handleInputChange = evt => {
+    this.setState({ name: evt.target.value });
+    console.log(this.state);
+  };
 
-//     this.reset();
-//   };
+  handleFormSubmit = evt => {
+    evt.preventDefault();
+  };
 
-//   reset = () => {
-//     this.setState({ name: '', number: '' });
-//   };
-
-//   render() {
-//     console.log(this.state);
-//     return (
-//       <>
-//         <Section title="Phonebook">
-//           <form onSubmit={this.handleSubmit}>
-//             <label>
-//               Name
-//               <input
-//                 type="text"
-//                 name="name"
-//                 required
-//                 value={this.state.name}
-//                 onChange={this.handleChange}
-//               />
-//             </label>
-//             <label>
-//               Number
-//               <input
-//                 type="tel"
-//                 name="number"
-//                 required
-//                 value={this.state.number}
-//                 onChange={this.handleChange}
-//               />
-//             </label>
-//             <button type="submit">Add contact</button>
-//           </form>
-//         </Section>
-//         <Section title="Contacts">
-//           {this.state.contacts.length > 0 && (
-//             <Contact
-//               contacts={this.state.contacts}
-//               number={this.state.number}
-//             />
-//           )}
-//         </Section>
-//       </>
-//     );
-//   }
-// }
+  render() {
+    return (
+      <form>
+        <label>
+          Name
+          <input
+            type="text"
+            name="name"
+            required
+            onChange={this.handleInputChange}
+          />
+        </label>
+      </form>
+    );
+  }
+}
