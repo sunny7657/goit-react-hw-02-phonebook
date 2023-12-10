@@ -1,4 +1,12 @@
 import { Component } from 'react';
+import styled from 'styled-components';
+
+const BtnStyled = styled.button`
+  display: block;
+  margin-top: 20px;
+  font-size: 12px;
+  padding: 8px;
+`;
 
 export class FormAddContact extends Component {
   state = {
@@ -43,7 +51,7 @@ export class FormAddContact extends Component {
             onChange={this.handleInputChange}
           />
         </label>
-        <button type="submit">Add contact</button>
+        <BtnStyled type="submit">Add contact</BtnStyled>
       </form>
     );
   }
