@@ -1,5 +1,3 @@
-// import { nanoid } from 'nanoid';
-
 import { ContactItem } from 'components/ContactItem/ContactItem';
 
 export const ContactList = ({ contacts }) => (

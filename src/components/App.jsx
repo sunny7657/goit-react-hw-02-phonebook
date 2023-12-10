@@ -2,8 +2,8 @@ import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { Section } from './Section/Section';
 import { FormAddContact } from './FormAddContact/FormAddContact';
-import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
+import { ContactList } from './ContactList/ContactList';
 
 export class App extends Component {
   state = {
@@ -14,10 +14,6 @@ export class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
-    // name: '',
-    // filter: '',
   };
 
   handleSubmit = data => {
@@ -25,14 +21,14 @@ export class App extends Component {
     this.setState(prev => ({ contacts: [...prev.contacts, newContact] }));
   };
 
-  handleFilter = query => {
-    this.state.contacts.map(contact => {
-      const { name } = contact;
-      return name.toLowerCase().includes(query.toLowerCase());
-    });
+  handleFilteredContacts = event => {
+    this.setState({ filter: event.target.value });
   };
 
   render() {
+    const filteredContacts = this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
+    );
     return (
       <>
         <Section title="Phonebook">
@@ -41,8 +37,8 @@ export class App extends Component {
         <Section title="Contacts">
           {this.state.contacts.length > 0 && (
             <>
-              <Filter onChange={this.handleFilter} />
-              <ContactList contacts={this.state.contacts} />
+              <Filter onChange={this.handleFilteredContacts} />
+              <ContactList contacts={filteredContacts} />
             </>
           )}
         </Section>
